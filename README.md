@@ -20,7 +20,7 @@ Simply put, here are the steps to follow, to generate a country map:
 - Get a shapefile from the awesome Natural Earth; since we are talking country-level maps here, we really want the admin level 1 data here:
 [http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/](http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/)
 Downloading this will include the shapefile (.shp) and several other files that relate to the shapefile (specifics not discussed here).
-- Put the downloaded shapefile and all the supporting files in the shapefiles directory
+- Put the downloaded shapefile and all the supporting files in the acmg/shapefiles directory (this is referenced from config.py)
 - Run the code with the country name.  In python, you can generate an operational ammaps html page with this code (here we provide the Iso-2 code for "Canada"):
 
     `map_generator.generate_single_map("CA")`
@@ -35,4 +35,4 @@ Some things to note...
 
 - Most of the code here was written in a big hurry, as the need was to generate maps and not to make things pretty; there are still many rough edges and things that could be improved.
 - No map shaping, smoothing, or size reduction is currently performed.
-- The code makes use of a simple tokenization code that I wrote and put on bitbucket last year called "fokenizer" ([https://bitbucket.org/icey502/fokenizer](https://bitbucket.org/icey502/fokenizer)).
+- The code makes use of a simple token-replacement code that I wrote and put on bitbucket last year called "fokenizer" ([https://bitbucket.org/icey502/fokenizer](https://bitbucket.org/icey502/fokenizer)).
