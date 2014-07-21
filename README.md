@@ -1,5 +1,5 @@
-ammap-country-map-generator
-===========================
+ammap-country-map-generator (acmg)
+==================================
 
 This is a work in progress; more info is coming (TODO)
 
@@ -14,14 +14,25 @@ The normal approach when bringing a shape file to something visual, is a hands-o
 Simply put, here are the steps to follow, to generate a country map:
 
 
-- GIT clone this project, or just grab the structure and place it where you want it.
+- Note: This code was written in Python for version 2.7, so you will need that installed.
+- GIT clone this project, or just grab the code and place it where you want it.
 - Install the dependencies - really, that means the python kartograph library ([http://kartograph.org](http://kartograph.org)).  I also found that I had to hack around some GDAL issues, so I used the directions here: ([http://pythongisandstuff.wordpress.com/2011/07/07/installing-gdal-and-ogr-for-python-on-windows/](http://pythongisandstuff.wordpress.com/2011/07/07/installing-gdal-and-ogr-for-python-on-windows/))
-- Get a shapefile from the awesome Natural Earth; since we are talking country-level maps here, we can't just grab any old data; we really want the admin level 1 data here:
+- Get a shapefile from the awesome Natural Earth; since we are talking country-level maps here, we really want the admin level 1 data here:
 [http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/](http://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/)
 Downloading this will include the shapefile (.shp) and several other files that relate to the shapefile (specifics not discussed here).
 - Put the downloaded shapefile and all the supporting files in the shapefiles directory
 - Run the code with the country name.  In python, you can generate an operational ammaps html page with this code (here we provide the Iso-2 code for "Canada"):
 
-    `mapGenerator.generateSingleMap("CA")`
+    `map_generator.generate_single_map("CA")`
     
 
+
+- The above step will generate a JS and HTML file in the generated_maps directory.  You can move this into your ammap installation to test it (I just put an ammaps installation into the directory itself so I can open it straight away)
+
+## The Usual Disclaimers ##
+Some things to note...
+
+
+- Most of the code here was written in a big hurry, as the need was to generate maps and not to make things pretty; there are still many rough edges and things that could be improved.
+- No map shaping, smoothing, or size reduction is currently performed.
+- The code makes use of a simple tokenization code that I wrote and put on bitbucket last year called "fokenizer" ([https://bitbucket.org/icey502/fokenizer](https://bitbucket.org/icey502/fokenizer)).
