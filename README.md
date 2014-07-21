@@ -29,6 +29,9 @@ Downloading this will include the shapefile (.shp) and several other files that 
 
 - The above step will generate a JS and HTML file in the generated_maps directory.  You can move this into your ammap installation to test it (I just put an ammaps installation into the directory itself so I can open it straight away)
 
+## Example Generated Map ##
+There is a screenshot of an example generated map in the docs directory.
+
 ## The Usual Disclaimers ##
 Some things to note...
 
