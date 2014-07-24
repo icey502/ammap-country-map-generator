@@ -17,11 +17,9 @@ def generate_all_maps(countryIso2CodeList):
     """
     Generates a set of maps using a supplied list of ISO-3166-2 codes.
     """
-    print "+++map_generator: generate_all_maps()"
+    print "+++map_generator: generateAllMaps()"
     for country in countryIso2CodeList:
-        print "+++map_generator: generating SVG for country:", country
-        shape_to_svg.generate_svg(country, config.SHAPEFILE)
-        svg_to_ammap.run(countryIso2Code)
+        generate_single_map(country)
     print "+++map_generator: done."
     
 if __name__ == "__main__":
