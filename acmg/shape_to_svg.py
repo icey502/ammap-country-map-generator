@@ -16,15 +16,15 @@ def generate_svg(countryIso2Code, shapefile):
     cfg = {"layers": [{"id": "mylayer", "src":shapefile, "filter":{"iso_a2": countryIso2Code},"attributes":{"code_hasc":"code_hasc","gn_name":"gn_name","gns_region":"gns_region","latitude":"latitude","longitude":"longitude"}}], "proj":{"id":"mercator"}}
     
     try:
-        print "+++shape_to_svg: about to generate country %s with config %s" % (countryIso2Code, ', '.join("%s=%r" % (key,val) for (key,val) in cfg.iteritems()))
+        print ("+++shape_to_svg: about to generate country %s with config %s" % (countryIso2Code, ', '.join("%s=%r" % (key,val) for (key,val) in cfg.iteritems())))
         k.generate(cfg, outfile=os.path.join(config.get_generated_file_path(), config.get_generated_svg_name(countryIso2Code)))
     except:
         e = sys.exc_info()
-        print "+++shape_to_svg: could not generate map for country: %s Exception: %s" % (countryIso2Code, e)
+        print ("+++shape_to_svg: could not generate map for country: %s Exception: %s" % (countryIso2Code, e))
         
 def generate_all_svg():
     for country in COUNTRIES:
-        print "+++shape_to_svg: generating SVG for country:", country
+        print ("+++shape_to_svg: generating SVG for country:", country)
         generate_svg(country,config.SHAPEFILE)
     
 if __name__ == "__main__":

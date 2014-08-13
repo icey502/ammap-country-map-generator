@@ -79,11 +79,11 @@ def generate_map(mapname, inputfile, js_templatefile, js_outputfile, html_templa
     From the given svg input file, extract the relevant info and use the given .js and .html template files to produce the "populated" js and html files.
     Setting karto=False should work for indiemap-generated SVG; Karto-generated SVG will have slightly different attribute names.
     """
-    print "+++svg_to_ammap: parsing file", inputfile
+    print ("+++svg_to_ammap: parsing file %s" % inputfile)
     try:
         svg = minidom.parse(inputfile)
         pathlist = svg.getElementsByTagName('path')
-        print "+++svg_to_ammap: svg loaded."
+        print ("+++svg_to_ammap: svg loaded.")
         
         figureList = []
         tokenDict = {}
@@ -108,27 +108,27 @@ def generate_map(mapname, inputfile, js_templatefile, js_outputfile, html_templa
                     svgFigure = SVG_Figure(elementDict[PREFIX+'code_hasc'] + "-" + str(elementCount), elementDict[PREFIX+'gn_name'], elementDict[PREFIX+'gns_region'],
                                       elementDict['d'], elementDict[PREFIX+'latitude'], elementDict[PREFIX+'longitude'])
                 figureList.append(svgFigure)
-                print "+++svg_to_ammap: %s:%s" % (str(elementCount),svgFigure)
+                print ("+++svg_to_ammap: %s:%s" % (str(elementCount),svgFigure))
                 elementCount += 1
                 
-        print "+++svg_to_ammap: %d elements found." % elementCount
+        print ("+++svg_to_ammap: %d elements found." % elementCount)
         # now we have a list of SVG_Figures, we can calculate a bounding box
         minLat, minLon, maxLat, maxLon = calculate_bounding_box(figureList)
-        print "+++svg_to_ammap: bounding box: %f,%f: %f,%f" % (minLat, minLon, maxLat, maxLon)
+        print ("+++svg_to_ammap: bounding box: %f,%f: %f,%f" % (minLat, minLon, maxLat, maxLon))
         
         # generate json suitable for ammap
         jsonPath = figuresToJsonString(figureList)
-        print "+++svg_to_ammap: jsonPath:",jsonPath
+        print ("+++svg_to_ammap: jsonPath:",jsonPath)
         
         tokenDict = {MAP_NAME_TOKEN:mapname, MIN_LAT_TOKEN:str(minLat), MIN_LON_TOKEN:str(minLon), MAX_LAT_TOKEN:str(maxLat), MAX_LON_TOKEN:str(maxLon),SVG_PATH_TOKEN:jsonPath} #customized for map generation
-        print "+++svg_to_ammap: generating ",js_outputfile
+        print ("+++svg_to_ammap: generating %s" % js_outputfile)
         # generate the js
         fokenizer.fokenize(js_templatefile, os.path.join(config.get_generated_file_path(), js_outputfile), tokenDict)
-        print "+++svg_to_ammap: generating ",html_outputfile
+        print ("+++svg_to_ammap: generating %s" % html_outputfile)
         # generate the html
         fokenizer.fokenize(html_templatefile, os.path.join(config.get_generated_file_path(), html_outputfile), tokenDict)
     except:
-        print "+++svg_to_ammap: error - the input file could not be parsed."
+        print ("+++svg_to_ammap: error - the input file could not be parsed.")
 
 def run(mapName):
     """
